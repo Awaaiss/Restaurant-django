@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}Reservation | My Restaurant{% endblock %}
+
+{% block content %}
+<h2>Book a Table</h2>
+{% if success %}
+    <div class="alert alert-success">Your reservation has been submitted!</div>
+{% endif %}
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-success">Reserve Now</button>
+</form>
+{% endblock %}

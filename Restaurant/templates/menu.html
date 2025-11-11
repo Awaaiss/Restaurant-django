@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Menu | My Restaurant{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+  <h1 class="text-center mb-4">Our Menu</h1>
+
+  <div class="row">
+    {% for item in items %}
+    <div class="col-md-4 mb-4">
+      <div class="card shadow-sm h-100 text-center">
+
+        <!-- Show uploaded image if available; fallback to a default -->
+        {% if item.picture %}
+        <img src="{{ item.picture.url }}" alt="{{ item.name }}">
+      {% else %}
+        <img src="{% static 'your_app/images/no-image.jpg' %}" class="card-img-top" alt="No image available">
+      {% endif %}
+      
+
+
+
+        <div class="card-body">
+          <h5 class="card-title">{{ item.name }}</h5>
+          <p class="card-text">{{ item.description }}</p>
+          <p class="fw-bold text-success">${{ item.price }}</p>
+          <a href="{% url 'order_item' item.id %}" class="btn btn-primary btn-sm">Order Now</a>
+
+        </div>
+
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}
